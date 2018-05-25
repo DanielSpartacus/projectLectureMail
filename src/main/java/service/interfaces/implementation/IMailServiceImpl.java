@@ -2,16 +2,10 @@ package service.interfaces.implementation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.sun.tools.javac.util.List;
-import constants.TypeMailConstant;
 import exceptions.RepositoryServiceException;
-import model.Attachement;
 import model.Mail;
 import service.interfaces.interfaces.IMailService;
-
 import javax.mail.*;
-import java.io.*;
-import java.util.Date;
 import java.util.HashMap;
 
 
@@ -62,8 +56,8 @@ public class IMailServiceImpl implements IMailService {
                 throw new RepositoryServiceException ("An error occurs when creating receveur", e);
             }
 
-            mapJsonBySender.put("SUBJECT", mail.getSubject());
-            mapJsonBySender.put("MESSAGE", (Message)mail.getMessage());
+
+            mapJsonBySender.put("MESSAGE", mail.getMessage());
 
 
                  mapJsonBySender.put("id", index);
@@ -86,7 +80,7 @@ public class IMailServiceImpl implements IMailService {
             }
 
             // Create attachments
-           mail.getAttachments();
+
             if (mail.getAttachments()!=null){
                 mail.getAttachments().forEach(message -> {
 
@@ -109,26 +103,26 @@ public class IMailServiceImpl implements IMailService {
 
 
 
-    public HashMap<String, Object> getMapJsonBySender() {
+    private HashMap<String, Object> getMapJsonBySender() {
         return mapJsonBySender;
     }
 
-    public void setMapJsonBySender(HashMap<String, Object> mapJsonBySender) {
+    private void setMapJsonBySender(HashMap<String, Object> mapJsonBySender) {
         this.mapJsonBySender = mapJsonBySender;
     }
-    public String getSubject() {
+    private String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    private void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public ArrayNode getArrayNode() {
+    private ArrayNode getArrayNode() {
         return arrayNode;
     }
 
-    public void setArrayNode(ArrayNode arrayNode) {
+    private void setArrayNode(ArrayNode arrayNode) {
         this.arrayNode = arrayNode;
     }
 }
